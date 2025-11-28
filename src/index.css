@@ -3,3 +3,13 @@
 * {
   font-family: "DM Sans", sans-serif;
 }
+
+body {
+  /* background-color: black; */
+}
+
+@layer components {
+  .main-container {
+    @apply container mx-auto px-7 py-5;
+  }
+}
