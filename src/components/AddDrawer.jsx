@@ -80,6 +80,7 @@ const AddDrawer = ({ addTask, closeDrawer }) => {
           <select
             id="priority"
             value={task.priority}
+            required
             onChange={(e) => setTask({ ...task, priority: e.target.value })}
             className="w-full rounded-md border-gray-300 border  p-3 text-base"
           >

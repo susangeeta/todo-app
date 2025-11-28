@@ -74,6 +74,7 @@ const EditDrawer = ({ editData, updateTask, closeDrawer }) => {
 
           <select
             value={task.priority}
+            required
             onChange={(e) => setTask({ ...task, priority: e.target.value })}
             className="w-full rounded-md border-gray-300 border  p-3 text-base"
           >

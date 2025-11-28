@@ -23,6 +23,8 @@ function ToDoItem() {
   const addTask = (newTask) => {
     setTasks([...tasks, { id: Date.now(), ...newTask }]);
   };
+
+  //delete
   const deleteTask = (id) => {
     Swal.fire({
       title: "Are you sure?",
@@ -49,6 +51,16 @@ function ToDoItem() {
   // Update task after editing
   const updateTask = (updated) => {
     setTasks(tasks.map((t) => (t.id === updated.id ? updated : t)));
+  };
+
+  //mark as complete
+
+  const toggleComplete = (id) => {
+    setTasks(
+      tasks.map((task) =>
+        task.id === id ? { ...task, completed: true } : task
+      )
+    );
   };
 
   return (
@@ -103,7 +115,9 @@ function ToDoItem() {
                   {tasks.map((item, i) => (
                     <div
                       key={i}
-                      className="grid grid-cols-7 lg:grid-cols-6 border-b border-b-gray-300 ursor-pointe w-full  "
+                      className={`grid grid-cols-7 lg:grid-cols-6 border-b border-b-gray-300 w-full ${
+                        item.completed ? "line-through text-gray-500" : ""
+                      }`}
                     >
                       <div className=" col-span-2 lg:col-span-1   text-sm font-medium flex items-center gap-2">
                         <div className="bg-gray-400 rounded-full h-8 w-8 flex items-center justify-center">
@@ -136,23 +150,36 @@ function ToDoItem() {
                       <div className="col-span-1 p-4  text-[#888888] text-xs md:text-sm font-bold flex items-center  justify-center text-right">
                         {item.date}
                       </div>
-
-                      <div className="col-span-2 p-4 text-sm flex gap-2 items-center justify-center ">
-                        <div
-                          onClick={() => {
-                            setEditTaskData(item);
-                            setIsEditOpen(true);
-                          }}
-                          className="bg-blue-600 cursor-pointer h-8 w-8 rounded-md flex items-center justify-center"
-                        >
-                          <MdModeEdit className="h-4 w-4 text-white" />
-                        </div>
-                        <div
-                          onClick={() => deleteTask(item.id)}
-                          className="bg-red-600 h-8 w-8 rounded-md flex items-center cursor-pointer justify-center "
-                        >
-                          <MdDeleteOutline className="h-4 w-4 text-white" />
-                        </div>
+                      <div className="col-span-2 p-4 text-sm flex gap-2 items-center justify-center">
+                        {item.completed ? (
+                          <span className="text-green-600 font-bold">
+                            Completed
+                          </span>
+                        ) : (
+                          <>
+                            <div
+                              onClick={() => {
+                                setEditTaskData(item);
+                                setIsEditOpen(true);
+                              }}
+                              className="bg-blue-600 cursor-pointer h-8 w-8 rounded-md flex items-center justify-center"
+                            >
+                              <MdModeEdit className="h-4 w-4 text-white" />
+                            </div>
+                            <div
+                              onClick={() => deleteTask(item.id)}
+                              className="bg-red-600 h-8 w-8 rounded-md flex items-center cursor-pointer justify-center"
+                            >
+                              <MdDeleteOutline className="h-4 w-4 text-white" />
+                            </div>
+                            <button
+                              onClick={() => toggleComplete(item.id)}
+                              className="bg-green-600 h-8 px-2 rounded-md text-white font-bold"
+                            >
+                              Complete
+                            </button>
+                          </>
+                        )}
                       </div>
                     </div>
                   ))}
