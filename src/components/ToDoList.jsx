@@ -3,10 +3,7 @@ import ToDoItem from "./ToDoItem";
 const ToDoList = () => {
   return (
     <div>
-      {" "}
-      <ul>
-        <ToDoItem />
-      </ul>
+      <ToDoItem />
     </div>
   );
 };
