@@ -5,7 +5,7 @@ const AddDrawer = ({ addTask, closeDrawer }) => {
   const [task, setTask] = useState({
     name: "",
     description: "",
-    priority: "High",
+    priority: "",
     date: "",
   });
 
@@ -23,7 +23,7 @@ const AddDrawer = ({ addTask, closeDrawer }) => {
     setTask({
       name: "",
       description: "",
-      priority: "High",
+      priority: "",
       date: "",
     });
   };
@@ -83,6 +83,7 @@ const AddDrawer = ({ addTask, closeDrawer }) => {
             onChange={(e) => setTask({ ...task, priority: e.target.value })}
             className="w-full rounded-md border-gray-300 border  p-3 text-base"
           >
+            <option value="">Select Priority</option>
             <option value="High">High</option>
             <option value="Medium">Medium</option>
             <option value="Low">Low</option>
