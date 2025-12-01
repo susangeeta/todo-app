@@ -45,7 +45,7 @@ const EditDrawer = ({ editData, updateTask, closeDrawer }) => {
           </label>
           <input
             type="text"
-            name="id"
+            name="description"
             value={task.description}
             onChange={(e) => setTask({ ...task, description: e.target.value })}
             required
@@ -59,7 +59,7 @@ const EditDrawer = ({ editData, updateTask, closeDrawer }) => {
           </label>
           <input
             type="date"
-            name="id"
+            name="date"
             value={task.date}
             onChange={(e) => setTask({ ...task, date: e.target.value })}
             required

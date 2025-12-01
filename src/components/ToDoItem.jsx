@@ -58,7 +58,7 @@ function ToDoItem() {
   const toggleComplete = (id) => {
     setTasks(
       tasks.map((task) =>
-        task.id === id ? { ...task, completed: true } : task
+        task.id === id ? { ...task, completed: !task.completed } : task
       )
     );
   };
@@ -95,7 +95,7 @@ function ToDoItem() {
               <h1 className="col-span-1 p-4 text-sm font-semibold flex items-center  justify-center ">
                 Due Date
               </h1>
-              <h1 class="col-span-2  p-4 text-sm font-semibold  items-center justify-center flex ">
+              <h1 className="col-span-2  p-4 text-sm font-semibold  items-center justify-center flex ">
                 Action
               </h1>
             </div>
@@ -112,9 +112,9 @@ function ToDoItem() {
                 </div>
               ) : (
                 <>
-                  {tasks.map((item, i) => (
+                  {tasks.map((item) => (
                     <div
-                      key={i}
+                      key={item.id}
                       className={`grid grid-cols-7 lg:grid-cols-6 border-b border-b-gray-300 w-full ${
                         item.completed ? "line-through text-gray-500" : ""
                       }`}
@@ -132,15 +132,15 @@ function ToDoItem() {
                         </div>
                       </div>
                       <div className=" hidden  col-span-1 p-4 text-[#727b93] font-bold text-sm md:flex items-center  justify-center ">
-                        {item.description.length > 20
+                        {item.description?.length > 20
                           ? item.description.slice(0, 20) + "..."
-                          : item.description}
+                          : item.description || ""}
                       </div>
 
                       <div className=" col-span-1 p-4 text-[#727b93] font-bold text-sm flex md:hidden items-center  justify-center ">
-                        {item.description.length > 10
+                        {item.description?.length > 10
                           ? item.description.slice(0, 10) + "..."
-                          : item.description}
+                          : item.description || ""}
                       </div>
 
                       <div className="col-span-1 p-4 text-[#727b93] font-bold text-sm flex items-center  justify-center">
