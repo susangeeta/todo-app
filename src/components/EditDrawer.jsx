@@ -2,14 +2,33 @@ import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 
 const EditDrawer = ({ editData, updateTask, closeDrawer }) => {
-  const [task, setTask] = useState(editData);
+  const [task, setTask] = useState({
+    id: null,
+    name: "",
+    description: "",
+    date: "",
+    priority: "",
+    completed: false,
+  });
 
   useEffect(() => {
-    setTask(editData);
+    if (editData) {
+      setTask({
+        id: editData.id ?? null,
+        name: editData.name ?? "",
+        description: editData.description ?? "",
+        date: editData.date ?? "",
+        priority: editData.priority ?? "",
+        completed: editData.completed ?? false,
+      });
+    }
   }, [editData]);
-
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!task.name.trim()) {
+      Swal.fire({ icon: "error", title: "Name required" });
+      return;
+    }
     updateTask(task);
     Swal.fire({
       icon: "success",
@@ -21,7 +40,7 @@ const EditDrawer = ({ editData, updateTask, closeDrawer }) => {
     closeDrawer();
   };
 
-  if (!task) return null;
+  if (!editData) return null;
   return (
     <div>
       <form onSubmit={handleSubmit} className="p-5 flex flex-col gap-3">
@@ -45,7 +64,7 @@ const EditDrawer = ({ editData, updateTask, closeDrawer }) => {
           </label>
           <input
             type="text"
-            name="id"
+            name="description"
             value={task.description}
             onChange={(e) => setTask({ ...task, description: e.target.value })}
             required
@@ -59,7 +78,7 @@ const EditDrawer = ({ editData, updateTask, closeDrawer }) => {
           </label>
           <input
             type="date"
-            name="id"
+            name="date"
             value={task.date}
             onChange={(e) => setTask({ ...task, date: e.target.value })}
             required
