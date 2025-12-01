@@ -54,7 +54,6 @@ function ToDoItem() {
   };
 
   //mark as complete
-
   const toggleComplete = (id) => {
     setTasks(
       tasks.map((task) =>
