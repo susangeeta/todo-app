@@ -95,7 +95,7 @@ function ToDoItem() {
               <h1 className="col-span-1 p-4 text-sm font-semibold flex items-center  justify-center ">
                 Due Date
               </h1>
-              <h1 class="col-span-2  p-4 text-sm font-semibold  items-center justify-center flex ">
+              <h1 className="col-span-2  p-4 text-sm font-semibold  items-center justify-center flex ">
                 Action
               </h1>
             </div>
